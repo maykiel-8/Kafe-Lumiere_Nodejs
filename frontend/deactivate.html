@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deactivate Account &middot; Kafé Lumière</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="header"></div>
+  <div class="auth-wrap">
+    <div class="card auth-card">
+      <h1 style="text-align:center">Deactivate Account</h1>
+      <p class="muted" style="text-align:center">We're sorry to see you go. Deactivating your account will log you out and disable access. An admin can reactivate it later.</p>
+      <button class="btn btn-danger" style="width:100%" id="confirmDeactivate">Yes, deactivate my account</button>
+      <a class="btn btn-ghost mt" style="width:100%" href="profile.html">Cancel</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    renderHeader();
+    if (requireAuth()) {
+      $('#confirmDeactivate').on('click', async function () {
+        if (!confirm('Are you sure? This cannot be undone by you.')) return;
+        try {
+          await api('/users/me/deactivate', { method: 'PUT' });
+          Auth.clear(); Cart.clear();
+          toast('Account deactivated', 'success');
+          setTimeout(() => location.href = 'login.html', 1000);
+        } catch (err) { toast(err.message, 'error'); }
+      });
+    }
+  </script>
+</body>
+</html>

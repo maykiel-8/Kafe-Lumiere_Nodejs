@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart &middot; Kafé Lumière</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="header"></div>
+  <div class="container">
+    <div class="page-title"><h2>Your Cart</h2></div>
+    <div class="grid" style="grid-template-columns: 2fr 1fr;align-items:start" id="cartLayout">
+      <div class="card" id="cartItems"></div>
+      <div class="card cart-summary">
+        <h3>Order Summary</h3>
+        <div class="flex between"><span class="muted">Items</span><span id="sumCount">0</span></div>
+        <div class="flex between mt"><strong>Total</strong><strong style="color:var(--gold)" id="sumTotal">₱0.00</strong></div>
+        <div id="cashierFields" class="hidden mt">
+          <div class="form-group">
+            <label>Customer (optional)</label>
+            <input type="text" id="custSearch" placeholder="Search customer by name/email" autocomplete="off" />
+            <div class="autocomplete" id="custAc"></div>
+            <input type="hidden" id="custId" />
+            <small class="muted" id="custLabel"></small>
+          </div>
+        </div>
+        <button class="btn btn-primary mt" style="width:100%" id="checkoutBtn">Place Order</button>
+        <button class="btn btn-ghost mt" style="width:100%" id="clearBtn">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">© Kafé Lumière Milk Tea Shop</div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    renderHeader('cart');
+    initCart();
+  </script>
+</body>
+</html>
